@@ -15,12 +15,41 @@ public class Pathmaker : MonoBehaviour {
 // translate the pseudocode below
 
 //	DECLARE CLASS MEMBER VARIABLES:
+private int counter = 0;
+public Transform floorPrefab;
+public Transform pathmakerSpherePrefab;
+static private int globalFloorCount = 0;
 //	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 
 
 	void Update () {
+		if (globalFloorCount >= 500){
+			Destroy(this.gameObject);
+			globalFloorCount = 0;
+		}
+		if (counter < 50){
+			float randomNum = Random.Range(0.0f,1.0f);
+			if (randomNum < 0.25f){
+				this.transform.Rotate(0,90,0);
+			}
+			else if (randomNum >= 0.25f && randomNum <= 0.5f)
+            {
+                this.transform.Rotate(0f, -90f, 0f);
+            }
+            else if(randomNum >= 0.978f && randomNum <= 1f)
+            {
+                Instantiate(pathmakerSpherePrefab, this.transform.position,this.transform.rotation);
+            }
+			Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
+			this.transform.position = this.transform.forward * 5 + this.transform.position;
+			counter++;
+			globalFloorCount++;
+		}
+		else{
+			Destroy(this.gameObject);
+		}
 //		If counter is less than 50, then:
 //			Generate a random number from 0.0f to 1.0f;
 //			If random number is less than 0.25f, then rotate myself 90 degrees;
@@ -51,7 +80,7 @@ public class Pathmaker : MonoBehaviour {
 //	STABILIZE: 
 //	- code it so that all the Pathmakers can only spawn a grand total of 500 tiles in the entire world; how would you do that?
 //          - hint 1: a "static" variable is like a global variable, there's only 1 instance of that variable shared across the entire game / all objects
-//	    - hint 2: declare a "public static int" counter, increment each time you instantiate a floor tile... like "globalTileCount++"
+//	        - hint 2: declare a "public static int" counter, increment each time you instantiate a floor tile... like "globalTileCount++"
 //          - hint 3: if there are already too many tiles, then self-destruct without spawning new floor tiles... like "if(globalTileCount > 500)" ... "Destroy(gameObject);"
 //          - note: a static var will persist beyond scene changes! you have to reset the variable manually!
 
