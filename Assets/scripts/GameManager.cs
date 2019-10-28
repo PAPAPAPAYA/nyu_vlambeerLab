@@ -44,14 +44,14 @@ public class GameManager : MonoBehaviour
         foreach(Transform a in floorList){
             //print(a.GetComponent<Renderer>().isVisible);
             if (!a.GetComponent<Renderer>().isVisible){
-                camMoveScript.me.camHeight += 0.05f;
+                camMoveScript.me.camHeight += 0.04f;
             }
         }
         //if (wallList.Count > 0){
             foreach(GameObject a in wallList){
                         //print(a.GetComponent<Renderer>().isVisible);
                         if (!a.GetComponent<Renderer>().isVisible){
-                            camMoveScript.me.camHeight += 0.05f;
+                            camMoveScript.me.camHeight += 0.03f;
                         }
                     }
         //}
