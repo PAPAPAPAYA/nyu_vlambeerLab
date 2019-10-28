@@ -62,7 +62,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210659187557196882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -107,4 +107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorPrefab: {fileID: 4113209856346078, guid: 65a6189e1bac1f549afc3dc95369929d,
     type: 3}
+  stonePrefab: {fileID: 0}
+  rocksPrefab: {fileID: 0}
+  cactusPrefab: {fileID: 0}
   pathmakerSpherePrefab: {fileID: 1210659187557196886}
+  spawnChanceMin: 0
+  killChanceMin: 0

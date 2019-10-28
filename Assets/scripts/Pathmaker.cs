@@ -17,6 +17,10 @@ public class Pathmaker : MonoBehaviour {
 //	DECLARE CLASS MEMBER VARIABLES:
 private int counter = 0;
 public Transform floorPrefab;
+public Transform stonePrefab;
+public Transform rocksPrefab;
+public Transform cactusPrefab;
+
 public Transform pathmakerSpherePrefab;
 //static private int globalFloorCount = 0;
 
@@ -70,7 +74,24 @@ public float killChanceMin = 0;
 				Destroy(this.gameObject);
 				GameManager.me.spawnerCount--;
 			}
-			Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
+			float randomNum4 = Random.Range(0.0f, 1.0f);
+			if (randomNum4 >= 0 && randomNum4 <= 0.4){
+				// normal
+				Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
+			}
+			else if (randomNum4 > 0.4 && randomNum4 <= 0.6){
+				// stone
+				Instantiate(stonePrefab, this.transform.position, this.transform.rotation);
+			}
+			else if (randomNum4 > 0.6 && randomNum4 <= 0.95){
+				// rocks
+				Instantiate(rocksPrefab, this.transform.position, this.transform.rotation);
+			}
+			else if (randomNum4 > 0.95f && randomNum4 <= 1){
+				// cactus
+				Instantiate(cactusPrefab, this.transform.position, this.transform.rotation);
+			}
+			//Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
 			this.transform.position = this.transform.forward * 5 + this.transform.position;
 			counter++;
 			GameManager.me.globalFloorCount++;
