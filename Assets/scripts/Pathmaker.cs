@@ -18,38 +18,66 @@ public class Pathmaker : MonoBehaviour {
 private int counter = 0;
 public Transform floorPrefab;
 public Transform pathmakerSpherePrefab;
-static private int globalFloorCount = 0;
+//static private int globalFloorCount = 0;
+
+public float spawnChanceMin = 0;
+//public float spawnChanceMax = 0;
+//private int spawnerCount = 1;
+public float killChanceMin = 0;
+//private float killChanceMax = 1;
 //	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 
 
 	void Update () {
-		if (globalFloorCount >= 500){
-			Destroy(this.gameObject);
-			globalFloorCount = 0;
+		if (GameManager.me.spawnerCount < 5)
+		{
+			spawnChanceMin = 0.9f;
+			killChanceMin = .999f;
 		}
-		if (counter < 50){
+		if (GameManager.me.spawnerCount >5 && GameManager.me.spawnerCount < 15){
+			spawnChanceMin = 0.95f;
+			killChanceMin = .8f;
+		}
+		if (GameManager.me.spawnerCount >15){
+			spawnChanceMin = 0.99f;
+			killChanceMin = .5f;
+		}
+
+		// if (globalFloorCount >= 200){
+		// 	Destroy(this.gameObject);
+		// 	globalFloorCount = 0;
+		// 	GameManager.me.spawnerCount = 1;
+		// }
+		if (counter < 60 && GameManager.me.globalFloorCount <= 500){
 			float randomNum = Random.Range(0.0f,1.0f);
-			if (randomNum < 0.25f){
+			if (randomNum < 0.15f){
 				this.transform.Rotate(0,90,0);
 			}
-			else if (randomNum >= 0.25f && randomNum <= 0.5f)
+			else if (randomNum >= 0.15f && randomNum <= 0.3f)
             {
                 this.transform.Rotate(0f, -90f, 0f);
             }
-            else if(randomNum >= 0.978f && randomNum <= 1f)
+			float randomNum2 = Random.Range(0.0f,1.0f);
+            if(randomNum >= spawnChanceMin && randomNum <= 1)
             {
                 Instantiate(pathmakerSpherePrefab, this.transform.position,this.transform.rotation);
+				GameManager.me.spawnerCount ++;
             }
+			float randomNum3 = Random.Range(0.0f,1.0f);
+			if (randomNum >= killChanceMin && randomNum <= 1){
+				Destroy(this.gameObject);
+				GameManager.me.spawnerCount--;
+			}
 			Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
 			this.transform.position = this.transform.forward * 5 + this.transform.position;
 			counter++;
-			globalFloorCount++;
+			GameManager.me.globalFloorCount++;
 		}
-		else{
-			Destroy(this.gameObject);
-		}
+		
+			
+		//}
 //		If counter is less than 50, then:
 //			Generate a random number from 0.0f to 1.0f;
 //			If random number is less than 0.25f, then rotate myself 90 degrees;
