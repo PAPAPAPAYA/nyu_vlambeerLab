@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2953693537113888373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876631066007102735}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7916a3845b575c540977f37b351c4248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallChecked: 0
 --- !u!1001 &6875672428827554975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1680193034015120, guid: 65a6189e1bac1f549afc3dc95369929d, type: 3}
       propertyPath: m_Name
-      value: FloorTileRocks
+      value: FloorTileRocks Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4113209856346078, guid: 65a6189e1bac1f549afc3dc95369929d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,13 +68,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 23480304006748552, guid: 65a6189e1bac1f549afc3dc95369929d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0e39d9bd1b426a44a851ee6994a23d6e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a6189e1bac1f549afc3dc95369929d, type: 3}
+--- !u!1 &6876631066007102735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1680193034015120, guid: 65a6189e1bac1f549afc3dc95369929d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6875672428827554975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6874137163712787265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4113209856346078, guid: 65a6189e1bac1f549afc3dc95369929d,

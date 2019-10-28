@@ -25,16 +25,20 @@ public Transform pathmakerSpherePrefab;
 //static private int globalFloorCount = 0;
 
 public float spawnChanceMin = 0;
-//public float spawnChanceMax = 0;
-//private int spawnerCount = 1;
 public float killChanceMin = 0;
-//private float killChanceMax = 1;
+
+
 //	Declare a private integer called counter that starts at 0; 		// counter var will track how many floor tiles I've instantiated
 //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
 //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
 
 
 	void Update () {
+		//print(GetComponent<Renderer>().isVisible);
+		if(!GetComponent<Renderer>().isVisible && GameManager.me.globalFloorCount < 501){
+			//camMoveScript.me.camHeight += .2f;
+		}
+
 		if (GameManager.me.spawnerCount < 5)
 		{
 			spawnChanceMin = 0.9f;
@@ -54,6 +58,9 @@ public float killChanceMin = 0;
 		// 	globalFloorCount = 0;
 		// 	GameManager.me.spawnerCount = 1;
 		// }
+		if (counter == 60 || GameManager.me.globalFloorCount > 500){
+			Destroy(this.gameObject);
+		}
 		if (counter < 60 && GameManager.me.globalFloorCount <= 500){
 			float randomNum = Random.Range(0.0f,1.0f);
 			if (randomNum < 0.15f){
@@ -77,19 +84,23 @@ public float killChanceMin = 0;
 			float randomNum4 = Random.Range(0.0f, 1.0f);
 			if (randomNum4 >= 0 && randomNum4 <= 0.4){
 				// normal
-				Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
+				//Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
+				GameManager.me.floorList.Add(Instantiate(floorPrefab, this.transform.position, this.transform.rotation));
 			}
 			else if (randomNum4 > 0.4 && randomNum4 <= 0.6){
 				// stone
-				Instantiate(stonePrefab, this.transform.position, this.transform.rotation);
+				//Instantiate(stonePrefab, this.transform.position, this.transform.rotation);
+				GameManager.me.floorList.Add(Instantiate(stonePrefab, this.transform.position, this.transform.rotation));
 			}
 			else if (randomNum4 > 0.6 && randomNum4 <= 0.95){
 				// rocks
-				Instantiate(rocksPrefab, this.transform.position, this.transform.rotation);
+				//Instantiate(rocksPrefab, this.transform.position, this.transform.rotation);
+				GameManager.me.floorList.Add(Instantiate(rocksPrefab, this.transform.position, this.transform.rotation));
 			}
 			else if (randomNum4 > 0.95f && randomNum4 <= 1){
 				// cactus
-				Instantiate(cactusPrefab, this.transform.position, this.transform.rotation);
+				//Instantiate(cactusPrefab, this.transform.position, this.transform.rotation);
+				GameManager.me.floorList.Add(Instantiate(cactusPrefab, this.transform.position, this.transform.rotation));
 			}
 			//Instantiate(floorPrefab, this.transform.position, this.transform.rotation);
 			this.transform.position = this.transform.forward * 5 + this.transform.position;
